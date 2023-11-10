@@ -2,6 +2,7 @@
 let state = "ASK_NAME";
 let leadName = "";
 let leadEmail = "";
+let accessToken = "6Cel800DHp000001tKCi888Hp0000005mCwqdgYHQOk1fNEMcvnrjutjtgWtLyWKSIbP7mkYhB2EBEL1rYirWhBmV4egfR5sFEu7D4miDB6"
 
 function updateChatbox(message) {
     var chatLog = document.getElementById("chatbox");
@@ -91,7 +92,7 @@ function sendToSalesforce(name, email) {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": "6Cel800DHp000001tKCi888Hp0000005mCwqdgYHQOk1fNEMcvnrjutjtgWtLyWKSIbP7mkYhB2EBEL1rYirWhBmV4egfR5sFEu7D4miDB6"
+            "Authorization": "Bearer " + accessToken
         },
         body: JSON.stringify(data)
     })
