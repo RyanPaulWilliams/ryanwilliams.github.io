@@ -2,7 +2,8 @@
 let state = "ASK_NAME";
 let leadName = "";
 let leadEmail = "";
-let accessToken = "6Cel800DHp000001tKCi888Hp0000005mCwqdgYHQOk1fNEMcvnrjutjtgWtLyWKSIbP7mkYhB2EBEL1rYirWhBmV4egfR5sFEu7D4miDB6"
+let leadCompany = "";
+let accessToken = "6Cel800DHp000001tKCi888Hp0000005mCwGS5jOh3MGTnZJlWbBSMeYuiG6FDCPlDhG2Q0eQdAsZWziEfyMpnyhkVXR0Y1mSWTECpelZjk";
 
 function updateChatbox(message) {
     var chatLog = document.getElementById("chatbox");
@@ -26,27 +27,30 @@ function sendMessage() {
     document.getElementById("user_input").value = "";
     updateChatbox("You: " + input);
 
-
     setTimeout(function() {
         let botResponse;
 
         if (state === "ASK_NAME") {
-            leadName = input; // Capture the name
+            leadName = input;
             botResponse = "Great! What's your email?";
             state = "ASK_EMAIL";
         } else if (state === "ASK_EMAIL") {
-            leadEmail = input; // Capture the email
+            leadEmail = input;
+            botResponse = "Thanks! And what's the name of your company?";
+            state = "ASK_COMPANY";
+        } else if (state === "ASK_COMPANY") {
+            leadCompany = input;
             botResponse = `Thanks, ${leadName}! How can I assist you further?`;
-            state = "CHAT"; // Change state to general chat
+            state = "CHAT";
         } else {
             // General chat responses
             botResponse = getBotResponse(input);
 
-            // If lead information is captured, send it to Salesforce
-            if (state === "CHAT" && leadName && leadEmail) {
-                sendToSalesforce(leadName, leadEmail);
-                leadName = ""; // Reset the lead information
+            if (state === "CHAT" && leadName && leadEmail && leadCompany) {
+                sendToSalesforce(leadName, leadEmail, leadCompany);
+                leadName = "";
                 leadEmail = "";
+                leadCompany = "";
             }
         }
 
@@ -55,44 +59,19 @@ function sendMessage() {
 }
 
 function getBotResponse(input) {
-    // Simple keyword-based responses
-    const responses = {
-        "hello": "Hello! What can I do for you today?",
-        "help": "Sure, I can help. What do you need assistance with?",
-        "services": "We offer a variety of services including X, Y, and Z. Which one interests you?",
-        "pricing": "Our pricing depends on the service. Would you like specific details on any service?",
-        "bye": "Goodbye! If you have more questions later, feel free to ask."
-    };
-
-    // Check for keywords in the user's input and return the corresponding response
-    for (let key in responses) {
-        if (input.includes(key)) {
-            return responses[key];
-        }
-    }
-
-    // Additional conversation logic
-    if (input.includes("cost of")) {
-        return "The cost varies depending on specific requirements. Could you please specify the service?";
-    } else if (input.includes("thank you")) {
-        return "You're welcome! Do you have any other questions?";
-    }
-
-    // Default response for unrecognized input
-    return "I'm not sure how to respond to that. Could you give me more details or ask something else?";
+    // [Same as your existing function]
 }
 
-function sendToSalesforce(name, email) {
-    console.log("Sending lead data to Salesforce:", name, email);
+function sendToSalesforce(name, email, company) {
+    console.log("Sending lead data to Salesforce:", name, email, company);
     const url = "https://rtslabs8-dev-ed.develop.my.salesforce.com/services/apexrest/LeadCreation/";
-    const data = { LastName: name, email: email };
+    const data = { LastName: name, Email: email, Company: company };
 
-    // Assuming you have handled authentication and have the access token
     fetch(url, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + accessToken
+            "Authorization": "Bearer 6Cel800DHp000001tKCi888Hp0000005mCwGS5jOh3MGTnZJlWbBSMeYuiG6FDCPlDhG2Q0eQdAsZWziEfyMpnyhkVXR0Y1mSWTECpelZjk"
         },
         body: JSON.stringify(data)
     })
