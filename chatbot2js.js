@@ -63,10 +63,10 @@ function getBotResponse(input) {
     const responses = {
         "hello": "Hello! What can I do for you today?",
         "help": "Sure, I can help. What do you need assistance with?",
-        "services": "At RTS Labs, we are committed to providing a comprehensive range of technology services that cater to your unique business needs.
-         Whether you have a groundbreaking idea waiting to be brought to life or 
-         you’re seeking to optimize your data insights, integrate systems seamlessly, 
-         develop cutting-edge web and mobile apps, or harness the full potential of Salesforce, we have the expertise and passion to make it happen.",
+        "services": At RTS Labs, we are committed to providing a comprehensive range of technology services " +
+         "that cater to your unique business needs. Whether you have a groundbreaking idea waiting to be brought to life or " +
+         "you’re seeking to optimize your data insights, integrate systems seamlessly, " +
+         "develop cutting-edge web and mobile apps, or harness the full potential of Salesforce, we have the expertise and passion to make it happen.",
         "pricing": "Our pricing depends on the service. Would you like specific details on any service?",
         "bye": "Goodbye! If you have more questions later, feel free to ask."
     };
