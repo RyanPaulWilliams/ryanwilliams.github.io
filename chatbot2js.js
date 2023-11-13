@@ -84,7 +84,7 @@ function getBotResponse(input) {
 
 function sendToSalesforce(name, email) {
     console.log("Sending lead data to Salesforce:", name, email);
-    const url = " https://rtslabs8-dev-ed.develop.my.salesforce.com/services/apexrest/LeadCreation/";
+    const url = "https://rtslabs8-dev-ed.develop.my.salesforce.com/services/apexrest/LeadCreation/";
     const data = { LastName: name, email: email };
 
     // Assuming you have handled authentication and have the access token
