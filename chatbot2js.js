@@ -59,8 +59,33 @@ function sendMessage() {
 }
 
 function getBotResponse(input) {
-    // [Same as your existing function]
+    // Simple keyword-based responses
+    const responses = {
+        "hello": "Hello! What can I do for you today?",
+        "help": "Sure, I can help. What do you need assistance with?",
+        "services": "We offer a variety of services including X, Y, and Z. Which one interests you?",
+        "pricing": "Our pricing depends on the service. Would you like specific details on any service?",
+        "bye": "Goodbye! If you have more questions later, feel free to ask."
+    };
+
+    // Check for keywords in the user's input and return the corresponding response
+    for (let key in responses) {
+        if (input.includes(key)) {
+            return responses[key];
+        }
+    }
+
+    // Additional conversation logic
+    if (input.includes("cost of")) {
+        return "The cost varies depending on specific requirements. Could you please specify the service?";
+    } else if (input.includes("thank you")) {
+        return "You're welcome! Do you have any other questions?";
+    }
+
+    // Default response for unrecognized input
+    return "I'm not sure how to respond to that. Could you give me more details or ask something else?";
 }
+
 
 function sendToSalesforce(name, email, company) {
     console.log("Sending lead data to Salesforce:", name, email, company);
