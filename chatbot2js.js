@@ -96,7 +96,7 @@ function sendToSalesforce(name, email, company) {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer 6Cel800DHp000001tKCi888Hp0000005mCwGS5jOh3MGTnZJlWbBSMeYuiG6FDCPlDhG2Q0eQdAsZWziEfyMpnyhkVXR0Y1mSWTECpelZjk",
+            "Authorization": "Bearer 00DHp000001tKCiMAM!AQwAQGLVk1VsHIbU1suFiqNYLunuEYjA37m2xNQfgwn.1WY0Dof2O6GGbKmgfVtz4aObGgz6nwWrMJrLNIrfmGbpEWxAYuqt",
             "Access-Control-Allow-Origin": "*"
         },
         body: JSON.stringify(data)
